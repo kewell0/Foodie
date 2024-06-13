@@ -16,8 +16,6 @@ function TabBarIcon(props: {
 }
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
@@ -49,7 +47,7 @@ export default function TabLayout() {
                   <FontAwesome
                     name="info-circle"
                     size={20}
-                    color={Colors[colorScheme ?? "light"].text}
+                    color={Colors.light.tint}
                     style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
                   />
                 )}

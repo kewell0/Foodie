@@ -6,11 +6,17 @@ import { Pressable } from "react-native";
 export default function MenuLayout() {
   return (
     <Stack>
-      <Stack.Screen
+      {/* <Stack.Screen
         name="index"
         options={{
           title: "Orders",
           headerTitleAlign: "center",
+        }}
+      /> */}
+      <Stack.Screen
+        name="list"
+        options={{
+          headerShown: false,
         }}
       />
     </Stack>
