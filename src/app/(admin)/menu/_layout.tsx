@@ -5,29 +5,26 @@ import { Pressable } from "react-native";
 
 export default function MenuLayout() {
   return (
-    <Stack
-      screenOptions={{
-        headerRight: () => (
-          <Link href="/cart" asChild>
-            <Pressable>
-              {({ pressed }) => (
-                <FontAwesome
-                  name="shopping-cart"
-                  size={20}
-                  color={Colors.light.tint}
-                  style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                />
-              )}
-            </Pressable>
-          </Link>
-        ),
-      }}
-    >
+    <Stack screenOptions={{}}>
       <Stack.Screen
         name="index"
         options={{
           title: "Menu",
           headerTitleAlign: "center",
+          headerRight: () => (
+            <Link href="/" asChild>
+              <Pressable>
+                {({ pressed }) => (
+                  <FontAwesome
+                    name="plus-square"
+                    size={20}
+                    color={Colors.light.tint}
+                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                  />
+                )}
+              </Pressable>
+            </Link>
+          ),
         }}
       />
       <Stack.Screen
@@ -35,6 +32,21 @@ export default function MenuLayout() {
         options={{
           title: "Product",
           headerTitleAlign: "center",
+
+          headerRight: () => (
+            <Link href="/" asChild>
+              <Pressable>
+                {({ pressed }) => (
+                  <FontAwesome
+                    name="pencil"
+                    size={20}
+                    color={Colors.light.tint}
+                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                  />
+                )}
+              </Pressable>
+            </Link>
+          ),
         }}
       />
     </Stack>

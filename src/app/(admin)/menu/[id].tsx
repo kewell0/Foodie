@@ -43,33 +43,7 @@ const ProductDetailScreen = () => {
         resizeMode="contain"
       />
 
-      <Text style={styles.subtitle}>Select Sizes</Text>
-      <View style={styles.sizes}>
-        {sizes.map((size) => (
-          <Pressable
-            onPress={() => setSelectedSize(size)}
-            style={[
-              styles.size,
-              {
-                backgroundColor: selectedSize === size ? "gainsboro" : "white",
-              },
-            ]}
-            key={size}
-          >
-            <Text
-              style={[
-                styles.sizeText,
-                {
-                  color: selectedSize === size ? "black" : "gray",
-                },
-              ]}
-            >
-              {size}
-            </Text>
-          </Pressable>
-        ))}
-      </View>
-
+      <Text style={styles.title}>${product.name}</Text>
       <Text style={styles.price}>${product.price}</Text>
       <Button text="Add To Cart" onPress={addToCart} />
     </View>
@@ -87,31 +61,14 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
     alignSelf: "center",
   },
-  subtitle: {
-    marginVertical: 10,
+  title: {
+    marginVertical: 20,
     fontWeight: "600",
   },
   price: {
     fontSize: 18,
     fontWeight: "bold",
-    marginTop: "auto",
-  },
-
-  sizes: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-  },
-  size: {
-    width: 50,
-    aspectRatio: 1,
-    borderRadius: 25,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  sizeText: {
-    fontSize: 20,
-    fontWeight: "500",
-    color: "black",
+    // marginTop: "auto",
   },
 });
 
