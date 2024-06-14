@@ -1,4 +1,12 @@
-import { View, Text, StyleSheet, Image, TextInput, Alert } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TextInput,
+  Alert,
+  ActivityIndicator,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { defaultPizzaImage } from "@/src/components/ProductListItem";
 import Colors from "../../../constants/Colors";
@@ -19,14 +27,16 @@ const CreateScreen = () => {
   const [errors, setErrors] = useState("");
 
   const { id: idString } = useLocalSearchParams();
-  const id = parseFloat(typeof idString === "string" ? idString : idString[0]);
+  const id = parseFloat(
+    typeof idString === "string" ? idString : idString?.[0]
+  );
 
   const isUpdating = !!id;
 
   const { mutate: insertProduct } = useInsertProduct();
   const { mutate: updateProduct } = useUpdateProduct();
   const { data: updatingProduct } = useProduct(id);
-  const { mutate: deleteProduct } = useDeleteProduct();
+  const { mutate: deleteProduct, isPending } = useDeleteProduct();
 
   const router = useRouter();
 
@@ -114,6 +124,10 @@ const CreateScreen = () => {
       },
     });
   };
+
+  if (isPending) {
+    return <ActivityIndicator />;
+  }
 
   const confirmDelete = () => {
     Alert.alert("Confirm", "Are you sure you want to delete?", [
