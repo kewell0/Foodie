@@ -5,6 +5,7 @@ import {
   FlatList,
   Pressable,
   ActivityIndicator,
+  TouchableOpacity,
 } from "react-native";
 import { Stack, useLocalSearchParams } from "expo-router";
 import orders from "../../../../assets/data/orders";
@@ -19,9 +20,7 @@ const OrderDetailScreen = () => {
   const id = parseFloat(typeof idString === "string" ? idString : idString[0]);
 
   const { data: order, isLoading, error } = useOrderDetails(id);
-  const { mutate: updateOrder } = useUpdateOrder();
-
-  console.log(error);
+  const { mutate: updateOrder, isPending } = useUpdateOrder();
 
   const updateStatus = async (status: string) => {
     await updateOrder({
@@ -44,7 +43,7 @@ const OrderDetailScreen = () => {
     <View style={styles.container}>
       <Stack.Screen options={{ title: `Order #${order.id}` }} />
 
-      <OrderListItem order={order} />
+      <OrderListItem order={order} isPending={isPending} />
 
       <FlatList
         data={order.order_items}
@@ -55,9 +54,9 @@ const OrderDetailScreen = () => {
             <Text style={{ fontWeight: "bold" }}>Status</Text>
             <View style={{ flexDirection: "row", gap: 5 }}>
               {OrderStatusList.map((status) => (
-                <Pressable
+                <TouchableOpacity
                   key={status}
-                  onPress={() => console.warn("Update status")}
+                  onPress={() => updateStatus(status)}
                   style={{
                     borderColor: Colors.light.tint,
                     borderWidth: 1,
@@ -78,7 +77,7 @@ const OrderDetailScreen = () => {
                   >
                     {status}
                   </Text>
-                </Pressable>
+                </TouchableOpacity>
               ))}
             </View>
           </>

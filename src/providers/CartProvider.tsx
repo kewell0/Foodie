@@ -65,7 +65,7 @@ const CartProvider = ({ children }: PropsWithChildren) => {
   };
 
   const checkout = () => {
-    console.warn("Checkout");
+    // console.warn("Checkout");
 
     insertOrder(
       { total },

@@ -1,10 +1,17 @@
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  ActivityIndicator,
+} from "react-native";
 import React from "react";
 import { Order } from "../types";
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
 import { Link, useSegments } from "expo-router";
 import { Tables } from "../database.types";
+import Colors from "../constants/Colors";
 
 dayjs.extend(relativeTime);
 
@@ -12,7 +19,7 @@ type OrderListItemProps = {
   order: Tables<"orders">;
 };
 
-const OrderListItem = ({ order }: OrderListItemProps) => {
+const OrderListItem = ({ order, isPending }: OrderListItemProps) => {
   const segments = useSegments();
 
   return (
@@ -23,7 +30,13 @@ const OrderListItem = ({ order }: OrderListItemProps) => {
           <Text style={styles.time}>{dayjs(order.created_at).fromNow()}</Text>
         </View>
 
-        <Text style={styles.status}>{order.status}</Text>
+        <Text style={styles.status}>
+          {isPending ? (
+            <ActivityIndicator color={Colors.light.tint} />
+          ) : (
+            order.status
+          )}
+        </Text>
       </Pressable>
     </Link>
   );
